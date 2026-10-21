@@ -7,11 +7,11 @@
 <style>
 :root{--bg:#f6f7f9;--card:#fff;--ink:#14213d;--mut:#55607a;--line:#d9dde6;--acc:#1f4fd8;--accT:#fff;--ok:#157347;--ko:#b42318;--warn:#fff4d6;--fs:17px}
 :root[data-theme=dark]{--bg:#0e1420;--card:#161e2e;--ink:#e6ebf5;--mut:#9aa7c2;--line:#2a3550;--acc:#7fa6ff;--accT:#0e1420;--ok:#5fd39a;--ko:#ff8a80;--warn:#3a3217}
-*{box-sizing:border-box}html{font-size:var(--fs);scroll-behavior:smooth;scroll-padding-top:70px}
+*{box-sizing:border-box}html{font-size:var(--fs);scroll-behavior:smooth;scroll-padding-top:115px}
 body{margin:0;background:var(--bg);color:var(--ink);font:1rem/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 h1,h2,h3{font-family:Georgia,"Iowan Old Style",serif;line-height:1.25}
 a{color:var(--acc)}
-header{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:.5rem;padding:.55rem .9rem;background:var(--card);border-bottom:1px solid var(--line)}
+header{flex-wrap:wrap;position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:.5rem;padding:.55rem .9rem;background:var(--card);border-bottom:1px solid var(--line)}
 .brand{font-family:Georgia,serif;font-weight:700;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 button,.btn{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:.35rem .7rem;text-decoration:none;display:inline-block}
 .btn{background:var(--acc);color:var(--accT);border-color:var(--acc);font-weight:600}.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
@@ -46,7 +46,7 @@ th,td{border:1px solid var(--line);padding:.4rem .55rem;text-align:left;vertical
 footer{max-width:900px;margin:2rem auto 1rem;padding:1rem;border-top:1px solid var(--line);color:var(--mut);text-align:center}
 footer .sig{font-family:Georgia,serif;font-size:1.15rem;color:var(--ink)}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
-.mx td{text-align:center;font-weight:700}.c1{background:#2e7d3233}.c2{background:#f9a82533}.c3{background:#ef6c0033}.c4{background:#c6282833}details{margin:.5rem 0}summary{cursor:pointer;font-weight:600;color:var(--acc)}body.pa .hero,body.pa .parts,body.pa footer,body.pa .part:not(#cours),body.pa #cours>*:not(#annexes){display:none}#lex{width:100%;padding:.5rem;font:inherit;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}.blank td{height:2rem}@media print{header,#drawer,#veil,.q button{display:none}}
+.mx td{text-align:center;font-weight:700}.c1{background:#2e7d3233}.c2{background:#f9a82533}.c3{background:#ef6c0033}.c4{background:#c6282833}details{margin:.5rem 0}summary{cursor:pointer;font-weight:600;color:var(--acc)}body.pa .hero,body.pa .parts,body.pa footer,body.pa .part:not(#cours),body.pa #cours>*:not(#annexes){display:none}#lex{width:100%;padding:.5rem;font:inherit;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}.blank td{height:2rem}.tab{display:none}.tab.on{display:block}#tabs{order:3;width:100%;display:flex;gap:.3rem;overflow-x:auto;padding-bottom:.1rem}#tabs a{white-space:nowrap;padding:.35rem .8rem;border-radius:8px;text-decoration:none;color:var(--ink);border:1px solid transparent}#tabs a:hover{background:var(--bg)}#tabs a.act{background:var(--acc);color:var(--accT);font-weight:700}body:not([data-tab=cours]) .hero,body:not([data-tab=cours]) .parts{display:none}body.pa #cours{display:block}@media print{header,#drawer,#veil,.q button{display:none}}
 </style>
 </head>
 <body>
@@ -66,15 +66,17 @@ footer .sig{font-family:Georgia,serif;font-size:1.15rem;color:var(--ink)}
  <a class="sub" href="#s2-4">Séance 2 · Prévention et plan de prévention</a>
  <a class="sub" href="#s2-5">Séance 2 · Étude de cas FitZone</a>
  <a class="sub" href="#synthese">Synthèses, conseils d’épreuve, repères réglementaires</a>
- <a class="sub" href="#lexique">Lexique</a>
- <a class="sub" href="#faq">FAQ détaillée (29 questions)</a>
  <a class="sub" href="#annexes">Annexes A–C : fiches vierges</a>
  <h4>2 – Exercices notés</h4>
  <a href="#exercices">Principe de validation</a>
  <a class="sub" href="#quiz1">Quiz séance 1 (/20)</a>
  <a class="sub" href="#quiz2">Quiz séance 2 (/20)</a>
  <a class="sub" href="#bilan">Bilan et validation</a>
- <h4>3 – Téléchargements</h4>
+ <h4>3 – Lexique</h4>
+ <a href="#lexique">Lexique filtrable (60 termes)</a>
+ <h4>4 – FAQ</h4>
+ <a href="#faq">FAQ détaillée (29 questions)</a>
+ <h4>5 – Téléchargements</h4>
  <a href="#telechargements">Support de cours (PDF)</a>
  <a class="sub" href="#telechargements">Correction (PDF)</a>
  <h4>Auteur</h4>
@@ -87,6 +89,7 @@ footer .sig{font-family:Georgia,serif;font-size:1.15rem;color:var(--ink)}
  <button id="fm" aria-label="Réduire le texte">A−</button>
  <button id="fp" aria-label="Agrandir le texte">A+</button>
  <button id="th" aria-label="Changer de thème">◐</button>
+<nav id="tabs" aria-label="Onglets"><a href="#cours" data-t="cours">Cours</a><a href="#exercices" data-t="exercices">Exercices</a><a href="#lexique" data-t="lexique">Lexique</a><a href="#faq" data-t="faq">FAQ</a><a href="#telechargements" data-t="telechargements">Téléchargements</a></nav>
 </header>
 <main>
 <div class="hero" id="accueil">
@@ -94,13 +97,9 @@ footer .sig{font-family:Georgia,serif;font-size:1.15rem;color:var(--ink)}
  <h1>Protéger les données à caractère personnel</h1>
  <p>Données personnelles, RGPD, risques, cartographie et analyse de risques. Lisez le cours, passez les deux quiz notés, puis téléchargez le support et sa correction.</p>
 </div>
-<div class="parts">
- <a href="#cours"><b>1 · Le cours</b>2 séances, étude de cas FitZone</a>
- <a href="#exercices"><b>2 · Exercices notés</b>2 quiz /20 pour valider</a>
- <a href="#telechargements"><b>3 · Téléchargements</b>Cours et correction en PDF</a>
-</div>
+<div class="parts"><a href="#cours"><b>Cours</b>2 séances, étude de cas FitZone</a><a href="#exercices"><b>Exercices</b>2 quiz /20 pour valider</a><a href="#lexique"><b>Lexique</b>Termes clés filtrables</a><a href="#faq"><b>FAQ</b>29 questions d’examen</a><a href="#telechargements"><b>Téléchargements</b>Cours et correction (PDF)</a></div>
 
-<section class="part" id="cours"><h2>1 · Le cours</h2>
+<section class="part tab" id="cours"><h2>1 · Le cours</h2>
 
 <article id="presentation"><h3>Présentation du cours</h3><p>Ce support couvre les deux premières séances du Thème 1 (2 × 2 h) : cadre juridique (RGPD) et démarche de gestion des risques. Fil rouge : l’étude de cas FitZone.</p><div class="tw"><table><tr><th></th><th>Séance 1 (2 h)</th><th>Séance 2 (2 h)</th></tr><tr><td>Thème</td><td>Données personnelles, principes du RGPD et risques</td><td>Analyse de risques et cartographie des données</td></tr><tr><td>Question directrice</td><td>Qu’est-ce qu’on protège, et contre quoi ?</td><td>Comment évaluer, prioriser et traiter les risques ?</td></tr><tr><td>Livrable</td><td>Mini-quiz et exercices de qualification</td><td>Dossier : cartographie, analyse de risques, plan de prévention</td></tr><tr><td>Évaluation</td><td>Quiz de synthèse</td><td>Cas FitZone noté sur 20</td></tr></table></div><p><b>Compétences visées</b> : qualifier une donnée et appliquer les principes du RGPD ; raisonner en sûreté/sécurité et en critères de sécurité ; argumenter les impacts juridiques, financiers et réputationnels ; inventorier un SI et cartographier les données ; conduire une analyse de risques (C = P × G) et proposer un plan de prévention ; analyser un document technique simple.</p></article>
 <h3 style="margin-top:1.5rem">Séance 1 – Données personnelles, principes du RGPD et risques</h3>
@@ -238,28 +237,28 @@ footer .sig{font-family:Georgia,serif;font-size:1.15rem;color:var(--ink)}
 <p><b>Conseils pour l’épreuve</b> : citer l’article ou le principe RGPD ; raisonner en critères (C, D, I, preuve) et impact sur les personnes ; toujours justifier (événement redouté → vulnérabilité → mesure) ; proposer des mesures proportionnées, techniques et organisationnelles plutôt qu’une liste d’outils ; présenter en tableaux.</p>
 <p><b>Note formateur</b> : dans le support « Analyse des risques », la pyramide de l’information affiche 5 % / 15 % / 80 % dans le texte mais 85 % sur le schéma ; seul 80 % fait 100 %.</p>
 <h4>Annexe D – Repères réglementaires</h4><div class="tw"><table><tr><th>Article</th><th>Objet</th></tr><tr><td>4</td><td>Définitions (DCP, traitement, violation)</td></tr><tr><td>5</td><td>Principes</td></tr><tr><td>6</td><td>Bases légales</td></tr><tr><td>9 et 10</td><td>Catégories particulières ; condamnations pénales</td></tr><tr><td>24</td><td>Responsabilité du responsable de traitement</td></tr><tr><td>25</td><td>Protection dès la conception et par défaut</td></tr><tr><td>30</td><td>Registre des activités de traitement</td></tr><tr><td>32</td><td>Sécurité du traitement</td></tr><tr><td>33 et 34</td><td>Notification à la CNIL (72 h) et aux personnes</td></tr><tr><td>35</td><td>AIPD</td></tr><tr><td>82 et 83</td><td>Droit à réparation ; amendes</td></tr></table></div></article>
-<article id="lexique"><h3>Lexique</h3><p>Par ordre alphabétique ; « Réf. » renvoie à la séance où la notion est introduite.</p><input id="lex" type="search" placeholder="Filtrer les termes…" aria-label="Filtrer le lexique"><div class="tw"><table id="lextab"></table></div></article>
-<article id="faq"><h3>FAQ détaillée</h3><p>Les questions que posent le plus souvent les étudiants et les jurys, regroupées par thème.</p><div id="faqbox"></div></article>
 <article id="annexes"><h3>Annexes A–C : fiches vierges</h3><p><button onclick="document.body.classList.add('pa');print();document.body.classList.remove('pa')">Imprimer les fiches</button></p><div id="annex"></div></article>
 </section>
 
-<section class="part" id="exercices"><h2>2 · Exercices notés</h2>
+<section class="part tab" id="exercices"><h2>2 · Exercices notés</h2>
 <p>Chaque séance a un quiz de 10 questions (2 points chacune, soit /20). Une séance est <b>validée à partir de 10/20</b>. Vos résultats sont conservés sur cet appareil.</p>
 <article id="quiz1"><h3>Quiz séance 1 – Données personnelles et RGPD</h3><div id="quiz-s1"></div></article>
 <article id="quiz2"><h3>Quiz séance 2 – Analyse de risques</h3><div id="quiz-s2"></div></article>
 <article id="bilan"><h3>Bilan et validation</h3><div id="bilan-out"></div><button id="reset" class="ghost">Effacer mes résultats</button></article>
 </section>
 
-<section class="part" id="telechargements"><h2>3 · Téléchargements</h2>
+<section class="part tab" id="telechargements"><h2>3 · Téléchargements</h2>
 <div class="dl">
  <div><h3>Support de cours</h3><p>Séances 1 et 2 : cours, FitZone, annexes, lexique et FAQ.</p><a class="btn" href="cours-rgpd-seances-1-2.pdf" download>Télécharger le cours (PDF)</a></div>
  <div><h3>Correction</h3><p>Corrigés des exercices, du quiz et de l’étude de cas FitZone.</p><a class="btn" href="corrige-rgpd-seances-1-2.pdf" download>Télécharger la correction (PDF)</a></div>
 </div></section>
+<section class="part tab" id="lexique"><h2>Lexique</h2><article><h3>Lexique</h3><p>Par ordre alphabétique ; « Réf. » renvoie à la séance où la notion est introduite.</p><input id="lex" type="search" placeholder="Filtrer les termes…" aria-label="Filtrer le lexique"><div class="tw"><table id="lextab"></table></div></article></section>
+<section class="part tab" id="faq"><h2>FAQ détaillée</h2><article><h3>FAQ détaillée</h3><p>Les questions que posent le plus souvent les étudiants et les jurys, regroupées par thème.</p><div id="faqbox"></div></article></section>
 </main>
 <footer>
  <div class="sig">by twagirumukiza</div>
  <p><a href="https://www.linkedin.com/in/innocent-twagirumukiza?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://twagirumukiza.github.io/Twagirumukiza-Innocent/" target="_blank" rel="noopener">Mon site</a></p>
- <small>Document pédagogique – 21 octobre 2026. Les références juridiques sont données à titre pédagogique.</small>
+ <small>Version 5 onglets · Document pédagogique – 21 octobre 2026. Les références juridiques sont données à titre pédagogique.</small>
 </footer>
 <script>
 const $=s=>document.querySelector(s),R=document.documentElement;
@@ -306,7 +305,7 @@ if(miss){$("#res-"+v).textContent="Répondez aux "+miss+" question(s) restante(s
 sc[v]=n*2;sv("sc",JSON.stringify(sc));$("#res-"+v).textContent="Score : "+n*2+"/20 – "+(n*2>=10?"séance validée":"séance non validée")+(miss?" ("+miss+" sans réponse)":"");bilan()}
 if(r){delete sc[r];sv("sc",JSON.stringify(sc));draw(r);bilan()}});
 $("#reset").onclick=()=>{sc={};sv("sc","{}");draw("s1");draw("s2");bilan()};
-const LEX="Actif (bien)|Ce qu’il faut protéger : données, processus métiers, applications, équipements.|S2
+const LEX=`Actif (bien)|Ce qu’il faut protéger : données, processus métiers, applications, équipements.|S2
 AIPD (DPIA)|Analyse d’impact relative à la protection des données (art. 35), obligatoire quand un traitement présente un risque élevé pour les droits et libertés (biométrie, santé à grande échelle, surveillance…).|S2
 Aléa|Événement futur possible, identifiable mais non quantifiable (NF X50-117).|S2
 AMDEC|Analyse des modes de défaillance, de leurs effets et de leur criticité : fréquence × gravité × indéterminabilité.|S2
@@ -364,10 +363,10 @@ Traçabilité|Historique de l’utilisation d’une donnée (journaux d’accès
 Violation de données|Atteinte à la sécurité entraînant destruction, perte, altération, divulgation ou accès non autorisé à des DCP (art. 4.12).|S1
 VPN|Réseau privé virtuel : tunnel chiffré sur un réseau d’opérateur ou sur Internet.|S2
 Vulnérabilité|Faiblesse exploitable : mot de passe faible, absence de MFA, correctif manquant, pas de sauvegarde.|S2
-Watering hole (point d’eau)|Infection du site d’une organisation pour contaminer les ordinateurs de ses visiteurs.|S1".split("\n").map(l=>l.split("|"));
+Watering hole (point d’eau)|Infection du site d’une organisation pour contaminer les ordinateurs de ses visiteurs.|S1`.split("\n").map(l=>l.split("|"));
 const drawLex=f=>{$("#lextab").innerHTML="<tr><th>Terme</th><th>Définition</th><th>Réf.</th></tr>"+LEX.filter(r=>(r[0]+r[1]).toLowerCase().includes(f)).map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join("")};
 $("#lex").oninput=e=>drawLex(e.target.value.toLowerCase());drawLex("");
-const FAQ="Une adresse IP est-elle toujours une donnée personnelle ?|En pratique oui : elle peut identifier une personne, notamment en la recoupant avec les données d’un fournisseur d’accès ; même une IP dynamique peut l’être si l’organisme dispose de moyens légaux d’identification. À l’examen : « oui, identification indirecte », et le justifier.
+const FAQ=`Une adresse IP est-elle toujours une donnée personnelle ?|En pratique oui : elle peut identifier une personne, notamment en la recoupant avec les données d’un fournisseur d’accès ; même une IP dynamique peut l’être si l’organisme dispose de moyens légaux d’identification. À l’examen : « oui, identification indirecte », et le justifier.
 Quelle différence entre anonymisation et pseudonymisation ? Un hash est-il anonyme ?|L’anonymisation est irréversible et sort du RGPD. La pseudonymisation reste réversible (clé, table de correspondance, recoupement) : ce sont toujours des DCP. Un hash d’e-mail ou de téléphone est une pseudonymisation : il suffit de hacher une liste de candidats pour retrouver l’original. C’est une mesure de sécurité utile (art. 32), pas une sortie du RGPD.
 Une adresse e-mail professionnelle est-elle une donnée personnelle ?|Oui si elle identifie une personne (prenom.nom@entreprise.fr) : le RGPD protège la personne physique, y compris dans son cadre professionnel. Une adresse générique (contact@) l’est beaucoup moins. Les personnes morales ne sont pas protégées.
 Le consentement est-il obligatoire pour tout traitement ?|Non, c’est une des six bases légales. La paie s’appuie sur le contrat et l’obligation légale ; une livraison sur l’exécution du contrat. Le consentement est surtout requis pour la prospection par certains canaux, les cookies non essentiels ou, explicite, certaines données sensibles. Entre employeur et salarié, il est rarement considéré comme « libre ».
@@ -395,14 +394,17 @@ Combien de mesures proposer et de quel type ?|La pertinence et la justification 
 Prévention, protection, réparation : quelle différence ?|La prévention réduit la probabilité (MFA, formation, mises à jour). La protection réduit l’impact (chiffrement, segmentation, sauvegarde). La réparation prévoit la réaction quand le problème est avéré (restauration, notification 72 h, communication). Un bon plan contient les deux volets, avec un responsable par risque.
 Pourquoi 4 critères (preuve incluse) alors que beaucoup de cours parlent de CIA ?|Confidentialité, intégrité, disponibilité sont le socle ; le support ajoute la preuve (non-répudiation), indispensable pour enquêter, sanctionner et démontrer sa conformité (art. 5.2). À l’examen, suivre le vocabulaire de l’énoncé ; en cas de doute, traiter les trois critères classiques et mentionner la preuve.
 Comment ces deux séances préparent-elles la suite du programme ?|Séance 3 : les outils Kali (nmap, nikto) découvrent des données exposées, ce qui repose sur la cartographie. Séances 4 à 6 : droits des personnes, notification et collecte de preuves reprennent preuve et traçabilité. 2e année : EBIOS RM approfondit la démarche ; DMZ, VLAN et Zero Trust reprennent la défense en profondeur.
-Que faut-il absolument savoir par cœur ?|(1) définition de la DCP et liste des données sensibles ; (2) les 7 principes et les 6 bases légales ; (3) la définition d’une violation et le délai de 72 h ; (4) les 4 critères et les 3 éléments de la preuve ; (5) C = P × G et l’idée de seuil ; (6) les 5 étapes de la gestion des risques ; (7) l’article 32 et l’article 35.".split("\n").map(l=>l.split("|"));
+Que faut-il absolument savoir par cœur ?|(1) définition de la DCP et liste des données sensibles ; (2) les 7 principes et les 6 bases légales ; (3) la définition d’une violation et le délai de 72 h ; (4) les 4 critères et les 3 éléments de la preuve ; (5) C = P × G et l’idée de seuil ; (6) les 5 étapes de la gestion des risques ; (7) l’article 32 et l’article 35.`.split("\n").map(l=>l.split("|"));
 const GR={0:"A. RGPD et données personnelles",7:"B. Violations de données et sanctions",14:"C. Analyse de risques",23:"D. Méthode d’examen et lien avec le reste du programme"};
 $("#faqbox").innerHTML=FAQ.map((f,i)=>(GR[i]?`<h4>${GR[i]}</h4>`:"")+`<details><summary>Q${i+1}. ${f[0]}</summary><p>${f[1]}</p></details>`).join("");
 const blank=(h,n)=>`<div class="tw"><table class="blank"><tr>${h.map(x=>"<th>"+x+"</th>").join("")}</tr>${("<tr>"+"<td></td>".repeat(h.length)+"</tr>").repeat(n)}</table></div>`;
 $("#annex").innerHTML="<h4>Annexe A – Fiche de cartographie des traitements</h4>"+blank(["Traitement / finalité","Données","Sensibles ?","Personnes","Support","Accès","Durée","Sous-traitant"],6)+"<h4>Annexe B – Tableau d’analyse de risques</h4>"+blank(["Réf.","Événement redouté","Critère","Menace","Vulnérabilité","P","G","C = P×G","Niveau"],6)+"<h4>Annexe C – Plan de prévention</h4>"+blank(["Risque","C","Mesure(s) et couche de défense","Responsable","Prévention ✔/✘","Réparation ✔/✘","État"],6);
 $("#classif").innerHTML="<tr><th>Information</th><th>Divulgable</th><th>Sensible</th><th>Stratégique</th><th>Accès autorisé pour</th></tr>"+["Contacts et dossiers du personnel","Factures clients","Factures fournisseurs","Listes fournisseurs","Données comptables","Relevés de compte","Propositions commerciales","Contrats commerciaux","Contrats de travail","Données de production","Grille tarifaire des produits","Procédés de fabrication","Veille concurrentielle"].map((t,i)=>`<tr><td>${t}</td>${[0,1,2].map(j=>`<td><input type="radio" name="cl${i}" aria-label="${t}"></td>`).join("")}<td><input type="text" aria-label="Accès ${t}" style="width:100%"></td></tr>`).join("");
+const TABS=["cours","exercices","lexique","faq","telechargements"];
+function route(){const h=decodeURIComponent(location.hash.slice(1))||"cours",el=document.getElementById(h),tb=el&&el.closest(".tab"),id=tb?tb.id:"cours";TABS.forEach(t=>{document.getElementById(t).classList.toggle("on",t==id);const b=document.querySelector('#tabs [data-t="'+t+'"]');b.classList.toggle("act",t==id)});document.body.dataset.tab=id;if(el&&el!==tb)el.scrollIntoView();else scrollTo(0,0)}
+addEventListener("hashchange",route);
 {const m=$("#matrix");let h="<tr><th>G \\ P</th>"+[1,2,3,4,5].map(p=>"<th>"+p+"</th>").join("")+"</tr>";for(let g=5;g>=1;g--){h+="<tr><th>"+g+"</th>"+[1,2,3,4,5].map(p=>{const c=p*g;return `<td class="c${c<5?1:c<10?2:c<15?3:4}">${c}</td>`}).join("")+"</tr>"}m.innerHTML=h}
-draw("s1");draw("s2");show("s1");show("s2");bilan();
+draw("s1");draw("s2");show("s1");show("s2");bilan();route();
 </script>
 </body>
 </html>
