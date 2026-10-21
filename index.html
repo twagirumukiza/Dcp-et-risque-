@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Protéger les données personnelles – BTS SIO SISR – Twagirumukiza</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#14213d;--mut:#55607a;--line:#d9dde6;--acc:#1f4fd8;--accT:#fff;--ok:#157347;--ko:#b42318;--warn:#fff4d6;--fs:17px}
+:root[data-theme=dark]{--bg:#0e1420;--card:#161e2e;--ink:#e6ebf5;--mut:#9aa7c2;--line:#2a3550;--acc:#7fa6ff;--accT:#0e1420;--ok:#5fd39a;--ko:#ff8a80;--warn:#3a3217}
+*{box-sizing:border-box}html{font-size:var(--fs);scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:1rem/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3{font-family:Georgia,"Iowan Old Style",serif;line-height:1.25}
+a{color:var(--acc)}
+header{position:sticky;top:0;z-index:30;display:flex;align-items:center;gap:.5rem;padding:.55rem .9rem;background:var(--card);border-bottom:1px solid var(--line)}
+.brand{font-family:Georgia,serif;font-weight:700;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+button,.btn{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:.35rem .7rem;text-decoration:none;display:inline-block}
+.btn{background:var(--acc);color:var(--accT);border-color:var(--acc);font-weight:600}.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+#burger{font-size:1.3rem;line-height:1;padding:.3rem .6rem}
+#veil{position:fixed;inset:0;background:#0008;opacity:0;pointer-events:none;transition:.2s;z-index:40}
+#drawer{position:fixed;top:0;left:0;bottom:0;width:min(330px,88vw);background:var(--card);z-index:50;transform:translateX(-102%);transition:transform .25s;overflow-y:auto;padding:1rem;border-right:1px solid var(--line)}
+body.open #drawer{transform:none}body.open #veil{opacity:1;pointer-events:auto}
+#drawer h4{margin:1.1rem 0 .3rem;color:var(--mut);font-size:.85rem}
+#drawer a{display:block;padding:.35rem .6rem;border-radius:6px;text-decoration:none;color:var(--ink)}
+#drawer a:hover{background:var(--bg)}#drawer a.sub{padding-left:1.4rem;font-size:.93rem;color:var(--mut)}
+#drawer .top{display:flex;justify-content:space-between;align-items:center}
+main{max-width:900px;margin:auto;padding:1rem}
+.hero{padding:2rem 0 1rem;border-bottom:1px solid var(--line)}.hero h1{font-size:2rem;margin:.2rem 0}
+.hero p{color:var(--mut);max-width:62ch}
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.8rem;margin:1.2rem 0}
+.parts a{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.9rem;text-decoration:none;color:var(--ink)}
+.parts b{display:block;color:var(--acc)}
+section.part{padding-top:1.5rem}
+section.part>h2{font-size:1.6rem;border-bottom:2px solid var(--acc);padding-bottom:.3rem}
+article{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:.2rem 1.1rem 1rem;margin:1rem 0}
+.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:.92rem;margin:.6rem 0}
+th,td{border:1px solid var(--line);padding:.4rem .55rem;text-align:left;vertical-align:top}th{background:var(--bg)}
+.note{background:var(--warn);border-left:4px solid var(--acc);padding:.5rem .8rem;border-radius:6px;margin:.8rem 0}
+.q{border-top:1px solid var(--line);padding:.6rem 0}.q label{display:block;padding:.2rem .4rem;border-radius:6px;cursor:pointer}
+.q.good label:has(input:checked){color:var(--ok);font-weight:600}.q.bad label:has(input:checked){color:var(--ko);font-weight:600}
+.ex{color:var(--mut);font-size:.92rem;margin:.3rem 0 0}
+.res{font-weight:700;font-size:1.1rem}.badge{display:inline-block;padding:.15rem .6rem;border-radius:99px;border:1px solid var(--line);font-size:.9rem}
+.badge.v{background:var(--ok);color:var(--accT);border-color:var(--ok)}
+.dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:.8rem}
+.dl div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1rem}
+footer{max-width:900px;margin:2rem auto 1rem;padding:1rem;border-top:1px solid var(--line);color:var(--mut);text-align:center}
+footer .sig{font-family:Georgia,serif;font-size:1.15rem;color:var(--ink)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media print{header,#drawer,#veil,.q button{display:none}}
+</style>
+</head>
+<body>
+<div id="veil"></div>
+<nav id="drawer" aria-label="Menu principal">
+ <div class="top"><b class="brand">Menu</b><button id="close" aria-label="Fermer le menu">✕</button></div>
+ <a href="#accueil">Accueil</a>
+ <h4>1 – Le cours</h4>
+ <a href="#cours">Vue d’ensemble</a>
+ <a class="sub" href="#s1-1">Séance 1 · Définitions (DCP, données sensibles)</a>
+ <a class="sub" href="#s1-2">Séance 1 · Principes et bases légales</a>
+ <a class="sub" href="#s1-3">Séance 1 · Typologie des risques, 4 critères, ANSSI</a>
+ <a class="sub" href="#s1-4">Séance 1 · Impacts et sanctions</a>
+ <a class="sub" href="#s2-1">Séance 2 · Imprévu, aléa, risque, problème</a>
+ <a class="sub" href="#s2-2">Séance 2 · Inventaire et cartographie</a>
+ <a class="sub" href="#s2-3">Séance 2 · Criticité et matrice 5 × 5</a>
+ <a class="sub" href="#s2-4">Séance 2 · Prévention et plan de prévention</a>
+ <a class="sub" href="#s2-5">Séance 2 · Étude de cas FitZone</a>
+ <h4>2 – Exercices notés</h4>
+ <a href="#exercices">Principe de validation</a>
+ <a class="sub" href="#quiz1">Quiz séance 1 (/20)</a>
+ <a class="sub" href="#quiz2">Quiz séance 2 (/20)</a>
+ <a class="sub" href="#bilan">Bilan et validation</a>
+ <h4>3 – Téléchargements</h4>
+ <a href="#telechargements">Support de cours (PDF)</a>
+ <a class="sub" href="#telechargements">Correction (PDF)</a>
+ <h4>Auteur</h4>
+ <a href="https://www.linkedin.com/in/innocent-twagirumukiza?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noopener">LinkedIn</a>
+ <a href="https://twagirumukiza.github.io/Twagirumukiza-Innocent/" target="_blank" rel="noopener">Mon site</a>
+</nav>
+<header>
+ <button id="burger" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+ <span class="brand">RGPD &amp; risques · BTS SIO SISR</span>
+ <button id="fm" aria-label="Réduire le texte">A−</button>
+ <button id="fp" aria-label="Agrandir le texte">A+</button>
+ <button id="th" aria-label="Changer de thème">◐</button>
+</header>
+<main>
+<div class="hero" id="accueil">
+ <p>BTS SIO – option SISR – Bloc 3 – 1re année · Thème 1 · Séances 1 et 2</p>
+ <h1>Protéger les données à caractère personnel</h1>
+ <p>Données personnelles, RGPD, risques, cartographie et analyse de risques. Lisez le cours, passez les deux quiz notés, puis téléchargez le support et sa correction.</p>
+</div>
+<div class="parts">
+ <a href="#cours"><b>1 · Le cours</b>2 séances, étude de cas FitZone</a>
+ <a href="#exercices"><b>2 · Exercices notés</b>2 quiz /20 pour valider</a>
+ <a href="#telechargements"><b>3 · Téléchargements</b>Cours et correction en PDF</a>
+</div>
+
+<section class="part" id="cours"><h2>1 · Le cours</h2>
+
+<h3 style="margin-top:1.5rem">Séance 1 – Données personnelles, principes du RGPD et risques</h3>
+<article id="s1-1"><h3>1. Définitions</h3>
+<p><b>Donnée à caractère personnel (DCP, art. 4)</b> : toute information se rapportant à une personne physique identifiée ou identifiable, directement (nom, photo, empreinte) ou indirectement (n° de sécurité sociale, e-mail nominatif, adresse IP, plaque d’immatriculation, recoupement d’informations).</p>
+<div class="tw"><table><tr><th>DCP</th><th>Non DCP</th></tr><tr><td>Nom, e-mail nominatif, adresse IP, matricule, géolocalisation, journaux de connexion liés à un compte</td><td>Statistiques réellement anonymisées, chiffre d’affaires, données météo</td></tr></table></div>
+<div class="note"><b>Point d’examen.</b> Pseudonymisation (réversible, toujours des DCP, un hash en fait partie) ≠ anonymisation (irréversible, hors RGPD).</div>
+<p><b>Données sensibles (art. 9)</b> : origine raciale ou ethnique, opinions politiques, convictions religieuses ou philosophiques, appartenance syndicale, données génétiques, biométriques (identification unique), de santé, vie ou orientation sexuelle. Traitement interdit par principe, sauf exceptions. Les condamnations (art. 10) et le NIR relèvent d’un régime renforcé.</p>
+<div class="tw"><table><tr><th>Terme</th><th>Définition</th></tr>
+<tr><td>Traitement</td><td>Toute opération sur des données (collecte, stockage, consultation, transmission, suppression)</td></tr>
+<tr><td>Responsable de traitement</td><td>Détermine les finalités et les moyens</td></tr>
+<tr><td>Sous-traitant</td><td>Traite pour le compte du responsable (hébergeur, paie…)</td></tr>
+<tr><td>DPO / CNIL</td><td>Délégué à la protection des données / autorité de contrôle française</td></tr></table></div>
+<p>Le RGPD est applicable depuis le 25 mai 2018 et couvre tout traitement de DCP de personnes situées dans l’UE.</p></article>
+
+<article id="s1-2"><h3>2. Principes du RGPD (art. 5) et bases légales (art. 6)</h3>
+<div class="tw"><table><tr><th>Principe</th><th>Exemple</th></tr>
+<tr><td>Licéité, loyauté, transparence</td><td>Mention d’information à la collecte</td></tr>
+<tr><td>Limitation des finalités</td><td>Fichier client livré ≠ revendu</td></tr>
+<tr><td>Minimisation</td><td>Pas de date de naissance pour une newsletter</td></tr>
+<tr><td>Exactitude</td><td>Mise à jour des coordonnées</td></tr>
+<tr><td>Limitation de la conservation</td><td>CV non retenus supprimés</td></tr>
+<tr><td>Intégrité et confidentialité</td><td>Chiffrement, droits d’accès, sauvegardes</td></tr>
+<tr><td>Responsabilité</td><td>Registre, politiques, journaux</td></tr></table></div>
+<p><b>6 bases légales</b> : consentement, contrat, obligation légale, intérêts vitaux, mission d’intérêt public, intérêt légitime. Un consentement est libre, spécifique, éclairé, univoque et retirable aussi facilement qu’il est donné.</p>
+<p><b>Art. 32</b> : mesures techniques et organisationnelles adaptées au risque (chiffrement, pseudonymisation, résilience, tests réguliers). Le RGPD impose une démarche fondée sur le risque, pas un produit. <b>Art. 25</b> : privacy by design et by default.</p></article>
+
+<article id="s1-3"><h3>3. Typologie des risques</h3>
+<p>Une <b>violation de données</b> (art. 4.12) est une atteinte à la sécurité entraînant, de façon accidentelle ou illicite, la destruction, la perte, l’altération, la divulgation ou l’accès non autorisé à des DCP.</p>
+<div class="tw"><table><tr><th></th><th>Sûreté</th><th>Sécurité</th></tr>
+<tr><td>Contre quoi</td><td>Accidents, dysfonctionnements involontaires</td><td>Actions malveillantes volontaires</td></tr>
+<tr><td>Exemples</td><td>Panne de disque, erreur, incendie</td><td>Ransomware, vol, blocage de service</td></tr>
+<tr><td>Parades</td><td>Sauvegarde, redondance</td><td>Contrôle d’accès, correctifs, filtrage</td></tr></table></div>
+<p><b>4 critères de sécurité</b> : confidentialité (accès réservé aux personnes autorisées), disponibilité, intégrité, preuve. La preuve repose sur trois éléments : <b>authentification</b>, <b>imputabilité</b> (un compte = une personne) et <b>traçabilité</b> (journaux, horodatage).</p>
+<p><b>Menaces ANSSI</b> : déstabilisation (déni de service, défiguration, divulgation), espionnage (point d’eau, spear phishing), sabotage, cybercriminalité (rançongiciel, phishing).</p>
+<div class="note"><b>Piège.</b> Un ransomware qui chiffre sans exfiltrer touche d’abord la disponibilité ; avec exfiltration (double extorsion), la confidentialité aussi. Toujours justifier.</div></article>
+
+<article id="s1-4"><h3>4. Impacts</h3>
+<div class="tw"><table><tr><th>Impact</th><th>Contenu</th></tr>
+<tr><td>Amendes niveau 1 (art. 83)</td><td>Jusqu’à 10 M€ ou 2 % du CA mondial (sécurité, notification)</td></tr>
+<tr><td>Amendes niveau 2</td><td>Jusqu’à 20 M€ ou 4 % du CA mondial (principes, bases légales, droits) ; on retient le plus élevé</td></tr>
+<tr><td>Civil / pénal</td><td>Réparation du préjudice (art. 82) ; code pénal art. 226-16 et suivants</td></tr>
+<tr><td>Notification</td><td>CNIL sous 72 h ; personnes concernées si risque élevé</td></tr>
+<tr><td>Financier</td><td>Remédiation, arrêt d’activité, rançon, cyberassurance, perte de contrats</td></tr>
+<tr><td>Réputation</td><td>Perte de confiance, médiatisation, départ de clients</td></tr></table></div>
+<p>Le RGPD raisonne d’abord en risque pour les personnes : usurpation d’identité, discrimination, perte financière, préjudice moral. Repères : Google 50 M€ (2019), Criteo 40 M€ (2023).</p></article>
+
+<h3 style="margin-top:2rem">Séance 2 – Analyse de risques et cartographie</h3>
+<article id="s2-1"><h3>1. Imprévu, aléa, risque, problème (NF X50-117)</h3>
+<div class="tw"><table><tr><th>Notion</th><th>Définition</th><th>Exemple</th></tr>
+<tr><td>Imprévu</td><td>Futur possible, non identifiable</td><td>Nouvelle réglementation en cours de projet</td></tr>
+<tr><td>Aléa</td><td>Identifiable, non quantifiable</td><td>Faille inconnue d’un logiciel</td></tr>
+<tr><td>Risque</td><td>Identifiable et quantifiable</td><td>Ransomware sur le serveur de fichiers</td></tr>
+<tr><td>Problème</td><td>Dommage déjà réalisé</td><td>Le serveur est chiffré</td></tr></table></div>
+<div class="note">Une <b>faute</b> est une erreur connue et non corrigée (ex. ne pas mettre à jour après une alerte) : ce n’est plus un risque.</div>
+<p><b>5 étapes</b> : description du projet, identification des risques, priorisation, stratégie de prévention, suivi.</p></article>
+
+<article id="s2-2"><h3>2. Inventaire du SI et cartographie</h3>
+<p>On ne protège bien que ce que l’on connaît. L’inventaire va du métier vers la technique : <b>actifs primordiaux</b> (processus, données) → <b>éléments supports</b> (applications, OS) → <b>équipements</b> (serveurs, postes, mobiles, réseau). Identifiants utiles : adresse MAC, IMEI. Outils : GLPI, OCS Inventory, nmap.</p>
+<p><b>Classification de l’information</b> : stratégique (≈ 5 %), sensible (≈ 15 %), divulgable (≈ 80 %). Ne pas confondre avec les données sensibles de l’art. 9.</p>
+<p><b>Réseaux</b> : BAN (corps), PAN (personne, &lt; 10 m), LAN (local), MAN (ville), CAN (campus), WAN (étendu, Internet). Chaque interconnexion est un flux à cartographier.</p>
+<p><b>Fiche de cartographie</b> : traitement/finalité, données, sensibles ?, personnes, supports, accès, durée de conservation, sous-traitants. Elle alimente le registre des traitements (art. 30).</p></article>
+
+<article id="s2-3"><h3>3. Prioriser : criticité et matrice 5 × 5</h3>
+<p><b>Criticité C = Probabilité P × Gravité G</b>, cotées de 1 à 5. Vocabulaire : actif, menace, vulnérabilité, événement redouté, risque résiduel.</p>
+<div class="tw"><table><tr><th>Criticité</th><th>Niveau</th><th>Action</th></tr>
+<tr><td>1 – 4</td><td>Faible</td><td>Acceptable</td></tr><tr><td>5 – 9</td><td>À surveiller</td><td>Sous le seuil</td></tr>
+<tr><td>10 – 14</td><td>À traiter</td><td>Seuil atteint : action obligatoire</td></tr><tr><td>15 – 25</td><td>Prioritaire</td><td>Traitement immédiat</td></tr></table></div>
+<p>Exemple : P = 4, G = 3 → C = 12, au-dessus du seuil. <b>Quatre zones</b> : risques perturbateurs (à supprimer), négligeables, de gravité (on « vit avec »), intolérables (projet refusé ou modifié).</p>
+<div class="note">Nuance RGPD : pour la santé ou la biométrie, un risque très grave pour les personnes, même peu probable, impose des mesures renforcées et souvent une AIPD (art. 35).</div>
+<p><b>AMDEC</b> : criticité = fréquence × gravité × indéterminabilité (probabilité de ne pas détecter l’incident). <b>4 traitements</b> : réduire, éviter, transférer, accepter.</p></article>
+
+<article id="s2-4"><h3>4. Prévention et plan de prévention</h3>
+<p>L’attaquant n’a besoin que d’une faille ; le défenseur doit couvrir tout le système. D’où la <b>défense en profondeur</b> : politique et procédures → sécurité physique → DMZ/périmètre → réseau interne → machine → application → donnée.</p>
+<p>Le <b>plan de prévention</b> synthétise l’analyse : pour chaque risque, un responsable, la prévention (✔/✘), la réparation (✔/✘) et un état (vert, orange, rouge). Un risque sans prévention ni réparation est le plus dangereux. Le suivi se fait à chaque comité : on réidentifie, recote et met à jour (art. 24 et 32).</p></article>
+
+<article id="s2-5"><h3>5. Étude de cas FitZone (corrigé résumé)</h3>
+<p>3 salles de sport, 45 salariés, environ 6 000 abonnés. Constats : certificats médicaux dans un dossier ouvert à tous, sauvegarde USB branchée en permanence, empreinte digitale pour les abonnés premium, caméras dans les vestiaires conservées « jusqu’à saturation », WhatsApp personnel pour des objectifs de santé, mot de passe admin <i>fitzone2019</i> partagé.</p>
+<div class="tw"><table><tr><th>Réf.</th><th>Événement redouté</th><th>Critère</th><th>P</th><th>G</th><th>C</th><th>Niveau</th></tr>
+<tr><td>R1</td><td>Fuite des certificats médicaux</td><td>Confidentialité</td><td>4</td><td>5</td><td>20</td><td>Prioritaire</td></tr>
+<tr><td>R2</td><td>Ransomware sur serveur et sauvegarde USB</td><td>Disponibilité</td><td>4</td><td>4</td><td>16</td><td>Prioritaire</td></tr>
+<tr><td>R3</td><td>Diffusion d’images des vestiaires</td><td>Confidentialité</td><td>3</td><td>4</td><td>12</td><td>À traiter</td></tr>
+<tr><td>R4</td><td>Modification d’IBAN sans auteur identifiable</td><td>Intégrité + preuve</td><td>3</td><td>4</td><td>12</td><td>À traiter</td></tr>
+<tr><td>R5</td><td>Fuite des empreintes digitales</td><td>Confidentialité</td><td>2</td><td>5</td><td>10</td><td>À traiter</td></tr>
+<tr><td>R6</td><td>Panne disque sans sauvegarde valide</td><td>Disponibilité</td><td>3</td><td>3</td><td>9</td><td>À surveiller</td></tr></table></div>
+<p><b>Mesures clés</b> : droits par groupe et attestation d’aptitude au lieu du certificat (minimisation) ; sauvegarde 3-2-1 avec copie hors ligne et test de restauration ; retrait des caméras des vestiaires et durée de conservation ; comptes nominatifs et journalisation ; alternative badge et AIPD pour la biométrie ; registre, référent RGPD, contrats sous-traitants, charte d’usage.</p>
+<div class="note">Le mot de passe partagé n’est pas un risque : c’est une faute et un problème, à corriger immédiatement.</div></article>
+</section>
+
+<section class="part" id="exercices"><h2>2 · Exercices notés</h2>
+<p>Chaque séance a un quiz de 10 questions (2 points chacune, soit /20). Une séance est <b>validée à partir de 10/20</b>. Vos résultats sont conservés sur cet appareil.</p>
+<article id="quiz1"><h3>Quiz séance 1 – Données personnelles et RGPD</h3><div id="quiz-s1"></div></article>
+<article id="quiz2"><h3>Quiz séance 2 – Analyse de risques</h3><div id="quiz-s2"></div></article>
+<article id="bilan"><h3>Bilan et validation</h3><div id="bilan-out"></div><button id="reset" class="ghost">Effacer mes résultats</button></article>
+</section>
+
+<section class="part" id="telechargements"><h2>3 · Téléchargements</h2>
+<div class="dl">
+ <div><h3>Support de cours</h3><p>Séances 1 et 2 : cours, FitZone, annexes, lexique et FAQ.</p><a class="btn" href="cours-rgpd-seances-1-2.pdf" download>Télécharger le cours (PDF)</a></div>
+ <div><h3>Correction</h3><p>Corrigés des exercices, du quiz et de l’étude de cas FitZone.</p><a class="btn" href="corrige-rgpd-seances-1-2.pdf" download>Télécharger la correction (PDF)</a></div>
+</div></section>
+</main>
+<footer>
+ <div class="sig">by twagirumukiza</div>
+ <p><a href="https://www.linkedin.com/in/innocent-twagirumukiza?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://twagirumukiza.github.io/Twagirumukiza-Innocent/" target="_blank" rel="noopener">Mon site</a></p>
+ <small>Document pédagogique – 21 octobre 2026. Les références juridiques sont données à titre pédagogique.</small>
+</footer>
+<script>
+const $=s=>document.querySelector(s),R=document.documentElement;
+const ld=k=>{try{return localStorage.getItem(k)}catch(e){return null}},sv=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+let th=ld("th")||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"),fs=+ld("fs")||17;
+const ap=()=>{R.dataset.theme=th;R.style.setProperty("--fs",fs+"px")};ap();
+$("#th").onclick=()=>{th=th=="dark"?"light":"dark";sv("th",th);ap()};
+$("#fp").onclick=()=>{fs=Math.min(24,fs+1);sv("fs",fs);ap()};
+$("#fm").onclick=()=>{fs=Math.max(13,fs-1);sv("fs",fs);ap()};
+const tg=o=>{document.body.classList.toggle("open",o);$("#burger").setAttribute("aria-expanded",o)};
+$("#burger").onclick=()=>tg(true);$("#close").onclick=$("#veil").onclick=()=>tg(false);
+document.querySelectorAll("#drawer a").forEach(a=>a.onclick=()=>tg(false));
+addEventListener("keydown",e=>{if(e.key=="Escape")tg(false)});
+const Q={
+s1:[
+["Une adresse IP est-elle une DCP ?",["Oui, par identification indirecte","Non, jamais","Seulement si elle est fixe"],0,"Elle peut identifier indirectement une personne."],
+["Un hash SHA-256 d’e-mail est-il anonyme ?",["Oui","Non : pseudonymisation, donc toujours une DCP","Il sort du champ du RGPD"],1,"Hacher une liste de candidats suffit à retrouver l’original."],
+["Quel principe est violé si l’on garde indéfiniment les CV refusés ?",["Minimisation","Limitation de la conservation","Exactitude"],1,"Une durée de conservation doit être définie."],
+["Un ransomware chiffre la base clients. Quel(s) critère(s) ?",["Disponibilité, et confidentialité si exfiltration","Intégrité uniquement","Aucun"],0,"Double extorsion : chiffrement et copie des données."],
+["Laquelle est une donnée sensible (art. 9) ?",["Adresse IP","Empreinte digitale","Chiffre d’affaires"],1,"Donnée biométrique."],
+["Plafond de l’amende la plus élevée du RGPD ?",["10 M€ ou 2 %","20 M€ ou 4 % du CA mondial (le plus élevé)","50 M€ fixes"],1,"Ce sont des plafonds, pas des montants automatiques."],
+["Un disque tombe en panne sans sauvegarde : sûreté ou sécurité ?",["Sécurité, ce n’est pas une violation","Sûreté, et c’est une violation (perte de disponibilité)","Ni l’un ni l’autre"],1,"Le RGPD ne distingue pas : l’atteinte aux données suffit."],
+["Les trois éléments de la preuve ?",["Authentification, imputabilité, traçabilité","Confidentialité, intégrité, disponibilité","Chiffrement, sauvegarde, pare-feu"],0,"Preuve = non-répudiation."],
+["Pourquoi un compte administrateur partagé est-il un problème ?",["Il est trop lent","Pas d’imputabilité : on ne sait pas qui a fait quoi","Il est interdit par l’art. 9"],1,"Un compte = une personne."],
+["Délai de notification d’une violation à la CNIL ?",["72 heures","7 jours","30 jours"],0,"Week-ends et jours fériés compris."]],
+s2:[
+["Événement futur possible, identifiable et quantifiable ?",["Imprévu","Aléa","Risque"],2,"Un aléa n’est pas quantifiable ; un imprévu n’est pas identifiable."],
+["Ne pas mettre à jour après une alerte de faille, c’est…",["Un risque","Une faute (et déjà un problème)","Un imprévu"],1,"Une faute est une erreur connue et non corrigée."],
+["Formule de la criticité ?",["P + G","P × G","P ÷ G"],1,"Criticité = Probabilité × Gravité."],
+["P = 4 et G = 3 : quelle criticité ?",["7","12","16"],1,"4 × 3 = 12."],
+["Seuil d’acceptabilité retenu en cours (matrice 5 × 5) ?",["≥ 5","≥ 10","≥ 20"],1,"Au-delà, des actions préventives sont obligatoires."],
+["Ordre logique de l’inventaire du SI ?",["Équipements → applications → métiers","Métiers et données → applications → équipements","Réseau → postes → données"],1,"On va du métier vers la technique."],
+["Principe de la défense en profondeur ?",["Un pare-feu très performant","Plusieurs lignes de défense indépendantes","Chiffrer uniquement les données"],1,"La perte d’une ligne mène à un niveau plus fort."],
+["Souscrire une cyberassurance revient à…",["Réduire","Éviter","Transférer"],2,"Réduire, éviter, transférer ou accepter."],
+["Le troisième facteur de l’AMDEC ?",["Indéterminabilité","Intentionnalité","Immédiateté"],0,"Probabilité de ne pas détecter l’incident à temps."],
+["Un traitement biométrique à risque élevé exige…",["Rien de particulier","Une AIPD (art. 35)","Une simple affiche"],1,"Analyse d’impact relative à la protection des données."]]};
+const names={s1:"Séance 1",s2:"Séance 2"};let sc={};try{sc=JSON.parse(ld("sc")||"{}")}catch(e){}
+function draw(k){$("#quiz-"+k).innerHTML=Q[k].map((q,i)=>`<div class="q" id="${k}q${i}"><p><b>${i+1}.</b> ${q[0]}</p>${q[1].map((o,j)=>`<label><input type="radio" name="${k}${i}" value="${j}"> ${o}</label>`).join("")}<p class="ex" hidden>${q[3]}</p></div>`).join("")+`<p><button class="btn" data-v="${k}">Valider la séance</button> <button data-r="${k}">Recommencer</button></p><p class="res" id="res-${k}"></p>`}
+function bilan(){const o=["s1","s2"].map(k=>{const v=sc[k];return `<p>${names[k]} : ${v==null?"non passée":v+"/20 "}<span class="badge ${v>=10?"v":""}">${v==null?"à faire":v>=10?"validée":"non validée"}</span></p>`}).join("");const ok=sc.s1>=10&&sc.s2>=10;$("#bilan-out").innerHTML=o+(sc.s1!=null&&sc.s2!=null?`<p class="res">Moyenne : ${((sc.s1+sc.s2)/2).toFixed(1)}/20 – ${ok?"Thème validé, bravo !":"Revoyez le cours puis recommencez."}</p>`:"")}
+function show(k){const r=sc[k];if(r!=null)$("#res-"+k).textContent="Score : "+r+"/20 – "+(r>=10?"séance validée":"séance non validée")}
+document.addEventListener("click",e=>{const v=e.target.dataset.v,r=e.target.dataset.r;
+if(v){let n=0,miss=0;Q[v].forEach((q,i)=>{const c=$(`input[name="${v}${i}"]:checked`),b=$("#"+v+"q"+i);if(!c)miss++;const ok=c&&+c.value==q[2];if(ok)n++;b.className="q "+(ok?"good":"bad");b.querySelector(".ex").hidden=false});
+if(miss){$("#res-"+v).textContent="Répondez aux "+miss+" question(s) restante(s) pour une note complète. Les corrections sont affichées.";}
+sc[v]=n*2;sv("sc",JSON.stringify(sc));$("#res-"+v).textContent="Score : "+n*2+"/20 – "+(n*2>=10?"séance validée":"séance non validée")+(miss?" ("+miss+" sans réponse)":"");bilan()}
+if(r){delete sc[r];sv("sc",JSON.stringify(sc));draw(r);bilan()}});
+$("#reset").onclick=()=>{sc={};sv("sc","{}");draw("s1");draw("s2");bilan()};
+draw("s1");draw("s2");show("s1");show("s2");bilan();
+</script>
+</body>
+</html>
